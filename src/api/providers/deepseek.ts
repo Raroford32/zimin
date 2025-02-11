@@ -23,7 +23,7 @@ export class DeepSeekHandler implements ApiHandler {
 	async *createMessage(systemPrompt: string, messages: Anthropic.Messages.MessageParam[]): ApiStream {
 		const model = this.getModel()
 
-		const isDeepseekReasoner = model.id.includes("DeepSeek-R1-Distill-Qwen-32B-abliterated")
+		const isDeepseekReasoner = model.id.includes("deepseek-reasoner") || model.id.includes("DeepSeek-R1-Distill-Qwen-32B-abliterated")
 
 		let openAiMessages: OpenAI.Chat.ChatCompletionMessageParam[] = [
 			{ role: "system", content: systemPrompt },
