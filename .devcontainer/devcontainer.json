@@ -1,0 +1,7 @@
+{
+  "tasks": {
+    "test": "nvm install && nvm use && npm install && cd webview-ui && npm install && cd .. && npm run test",
+    "build": "nvm install && nvm use && npm run install:all && npm run compile",
+    "launch": "nvm install && nvm use && npm run install:all && code . && (press F5 or Run -> Start Debugging in VSCode)"
+  }
+}
