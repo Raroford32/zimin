@@ -14,7 +14,7 @@ export class DeepSeekHandler implements ApiHandler {
 	constructor(options: ApiHandlerOptions) {
 		this.options = options
 		this.client = new OpenAI({
-			baseURL: "https://api.deepseek.com/v1",
+			baseURL: "http://192.222.53.30:8000/v1",
 			apiKey: this.options.deepSeekApiKey,
 		})
 	}
@@ -23,7 +23,7 @@ export class DeepSeekHandler implements ApiHandler {
 	async *createMessage(systemPrompt: string, messages: Anthropic.Messages.MessageParam[]): ApiStream {
 		const model = this.getModel()
 
-		const isDeepseekReasoner = model.id.includes("deepseek-reasoner")
+		const isDeepseekReasoner = model.id.includes("DeepSeek-R1-Distill-Qwen-32B-abliterated")
 
 		let openAiMessages: OpenAI.Chat.ChatCompletionMessageParam[] = [
 			{ role: "system", content: systemPrompt },
@@ -41,7 +41,7 @@ export class DeepSeekHandler implements ApiHandler {
 			stream: true,
 			stream_options: { include_usage: true },
 			// Only set temperature for non-reasoner models
-			...(model.id === "deepseek-reasoner" ? {} : { temperature: 0 }),
+			...(model.id === "DeepSeek-R1-Distill-Qwen-32B-abliterated" ? {} : { temperature: 0 }),
 		})
 
 		for await (const chunk of stream) {
